@@ -7,13 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+<% 
+	int num = Integer.parseInt(request.getParameter("num"));
+	int ref = Integer.parseInt(request.getParameter("ref"));
+	int pos = Integer.parseInt(request.getParameter("pos"));
+	int depth = Integer.parseInt(request.getParameter("depth"));
+%>
 <center><h2>답글 작성</h2></center>
 <form method="post" action="reply_Proc.jsp">
 <div align="center">
 <table>
 <tr>
 <td>제목</td>
-<td><input name="subject"></td>
+<td><input name="subject" value="[re] "></td>
 </tr>
 
 <tr>
@@ -30,7 +36,11 @@
 </tr>
 <tr>
 <td>내용</td>
-<td><textarea rows="15" cols="60" name="content"></textarea></td>
+<td><textarea rows="15" cols="60" name="content"></textarea>
+	<input type="hidden" name="ref" value="<%=ref%>">
+	<input type="hidden" name="pos" value="<%=pos%>">
+	<input type="hidden" name="depth" value="<%=depth%>">
+</td>
 </tr>
 <tr>
 <td></td>

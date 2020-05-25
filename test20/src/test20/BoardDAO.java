@@ -146,19 +146,18 @@ public class BoardDAO {
 	public void reply_Proc(BoardBean bean) {
 		Connection con = null;
 		PreparedStatement stmt = null;
-		String sql = null;
 		int ref = bean.getRef();
 		int pos = bean.getPos();
 		int depth = bean.getDepth();
 		try {
 			con = pool.getConnection();
-			sql = "update Board7 set pos = pos+1 where ref = ?, pos>?";
-			stmt = con.prepareStatement(sql);
+			String upsql = "update Board7 set pos = pos+1 where ref = ? and pos>?";
+			stmt = con.prepareStatement(upsql);
 			stmt.setInt(1, ref);
 			stmt.setInt(2, pos);
 			stmt.executeUpdate();
 			
-			sql = "insert into Board7 values(?,?,?,?,0,?,?,?,?,?,now())";
+			String sql = "insert into Board7 values(?,?,?,?,0,?,?,?,?,?,now())";
 			stmt = con.prepareStatement(sql);
 			stmt.setInt(1, bean.getNum());
 			stmt.setInt(2, ref);
@@ -175,6 +174,30 @@ public class BoardDAO {
 		}finally {
 			pool.freeConnection(con,stmt);
 		}
+	}
+	
+	public String PwCheck(int num) {
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		String pw = null;
+		
+		try {
+			con = pool.getConnection();
+			sql = "select pw from Board7 where num = ?";
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, num);
+			rs = stmt.executeQuery();
+			if(rs.next())
+				pw = rs.getString(1);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			pool.freeConnection(con,stmt,rs);
+		}
+		return pw;
 	}
 	
 	

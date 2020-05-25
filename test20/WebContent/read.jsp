@@ -41,8 +41,9 @@
 <td>날짜</td>
 <td><%=bean.getRegdate()%></td>
 </tr>
-<tr>
+<tr><td></td>
 <td><input type="button" value="답글" onclick="location.href='reply.jsp?num=<%=bean.getNum()%>&ref=<%=bean.getRef()%>&pos=<%=bean.getPos()%>&depth=<%=bean.getDepth()%>'">
+	<input type="button" value="수정" onclick="location.href='PwCheck.jsp?num=<%=bean.getNum()%>'">
 	<input type="button" value="리스트" onclick="location.href='list.jsp'">
 </table>
 </div>
