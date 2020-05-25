@@ -224,4 +224,19 @@ public class BoardDAO {
 		}
 	}
 	
+	public void deleteBoard(int num) {
+		Connection con = null;
+		PreparedStatement stmt = null;
+		String sql = null;
+		
+		try {
+			con = pool.getConnection();
+			sql = "delete * from Board7 where num = ?";
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			pool.freeConnection(con,stmt);
+		}
+	}
+	
 }
