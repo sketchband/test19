@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="bean" class="test20.BoardBean"/>
-<jsp:useBean id="dao" class="test20.BoardDAO"/>
-<jsp:setProperty property="*" name="bean"/>    
+<jsp:setProperty property="*" name="bean"/>  \
+<jsp:useBean id="dao" class="test20.BoardDAO"/>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +10,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% dao.update_Proc(bean);
-   response.sendRedirect("list.jsp");	
+<% dao.UPdateBoard(bean);
+   response.sendRedirect("list.jsp");
 %>
 </body>
 </html>

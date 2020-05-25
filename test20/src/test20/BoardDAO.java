@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
 
+import test20.BoardBean;
+
 public class BoardDAO {
 
 	private DBConnectionMgr pool;
@@ -200,26 +202,26 @@ public class BoardDAO {
 		return pw;
 	}
 	
-	public void update_Proc(BoardBean bean) {
+	public void UPdateBoard(BoardBean bean) {
 		Connection con = null;
 		PreparedStatement stmt = null;
 		String sql = null;
 		
 		try {
 			con = pool.getConnection();
-			sql = "update Board7 set subject = ?, name = ?,email = ?, content = ? where num = ?";
+			sql = "update Board7 set subject = ?,name=?,email=?,content=? where num = ?";
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, bean.getSubject());
 			stmt.setString(2, bean.getName());
 			stmt.setString(3, bean.getEmail());
 			stmt.setString(4, bean.getContent());
 			stmt.setInt(5, bean.getNum());
+			stmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			pool.freeConnection(con,stmt);
 		}
 	}
-	
 	
 }
