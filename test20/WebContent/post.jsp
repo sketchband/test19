@@ -8,5 +8,12 @@
 </head>
 <body>
 <center><h2>게시글 작성</h2></center>
+
+<div align="center">
+<table>
+<tr>
+<td>
+</table>
+</div>
 </body>
 </html>
