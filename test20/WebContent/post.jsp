@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-post
+<center><h2>게시글 작성</h2></center>
 </body>
 </html>
