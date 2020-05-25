@@ -13,11 +13,15 @@
    if(pw.equals(dao.PwCheck(num))){
 	  %>
 	  <script>
-	  location.href="update.jsp";
+	  location.href="update.jsp?num=<%=num%>";
 	  </script>
   <% }else{%>
+   <script>
 	   alert("비밀번호를 확인해 주십시오.");
-	   history.go(-1);<%
+	   history.go(-1);
+	    </script>
+	   <%
+	   
    }
 %>
 </body>
