@@ -8,7 +8,7 @@
 </head>
 <body>
 <center><h2>게시글 작성</h2></center>
-
+<form method="post" action="post_Proc.jsp">
 <div align="center">
 <table>
 <tr>
@@ -40,5 +40,6 @@
 	</tr>
 </table>
 </div>
+</form>
 </body>
 </html>
