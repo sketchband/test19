@@ -231,7 +231,10 @@ public class BoardDAO {
 		
 		try {
 			con = pool.getConnection();
-			sql = "delete * from Board7 where num = ?";
+			sql = "delete from Board7 where num = ?";
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, num);
+			stmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {

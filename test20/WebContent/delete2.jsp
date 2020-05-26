@@ -16,10 +16,20 @@
 %>
 <%
 	if(pw.equals(dao.PwCheck(num))){
-		%>맞음
+		dao.deleteBoard(num);
+		%>
+		<script type="text/javascript">
+		location.href="list.jsp";
+		</script>
 	<%}else{
-		%>틀림
+		%>
+		<script type="text/javascript">
+		alert("비밀번호가 틀렸습니다.");
+		history.go(-1);
+		</script>
+		
 	<%}
+
 %>
 </body>
 </html>
