@@ -58,7 +58,7 @@ public class BoardDAO {
 		
 	}
 	
-	public Vector<BoardBean> BoardList(String keyWord,String keyField,int start,int end){
+	public Vector<BoardBean> BoardList(int start,int end){
 		Connection con = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -67,19 +67,20 @@ public class BoardDAO {
 		
 		try {
 			con = pool.getConnection();
-			if(keyWord.equals("")||keyWord.equals("null")) {
-				sql = "select * from  Board7 order by ref desc,pos limit ?,?";
+			//if(keyWord.equals("")||keyWord.equals("null")) {
+				sql = "select * from (select A.* ,Rownum Rnum from(select * from Board7 order by ref desc,pos asc)A)"
+						+"where Rnum > ? and Rnum <= ? ";
 				stmt = con.prepareStatement(sql);
 				stmt.setInt(1, start);
-				stmt.setInt(2, end);
-			}else {
-				sql = "select * from Board7 where "+keyWord+" Like ? ";
-				sql = sql+" order by ref desc,pos limit ?,?";
-				stmt = con.prepareStatement(sql);
-				stmt.setString(1, "%"+keyWord+"%");
-				stmt.setInt(2, start);
-				stmt.setInt(3, end);
-			}
+				stmt.setInt(2, end+1);
+			//}else {
+				//sql = "select * from Board7 where "+keyWord+" Like ? ";
+				//sql = sql+" order by ref desc,pos limit ?,?";
+				//stmt = con.prepareStatement(sql);
+				//stmt.setString(1, "%"+keyWord+"%");
+				//stmt.setInt(2, start);
+				//stmt.setInt(3, end);
+			//}
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				BoardBean bean = new BoardBean();
@@ -240,6 +241,26 @@ public class BoardDAO {
 		}finally {
 			pool.freeConnection(con,stmt);
 		}
+	}
+	
+	public int getAllCount() {
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			con = pool.getConnection();
+			String sql = "select count(*) from Board7";
+			stmt = con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			if(rs.next())
+				count = rs.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			pool.freeConnection(con,stmt,rs);
+		}
+		return count;
 	}
 	
 }
