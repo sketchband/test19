@@ -63,16 +63,15 @@ public class BoardDAO {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql = null;
-		Vector<BoardBean> vlist = new Vector<BoardBean>();
+		Vector<BoardBean> vlist = new Vector<>();
 		
 		try {
-			con = pool.getConnection();
+				con = pool.getConnection();
 			//if(keyWord.equals("")||keyWord.equals("null")) {
-				sql = "select * from (select A.* ,Rownum Rnum from(select * from Board7 order by ref desc,pos asc)A)"
-						+"where Rnum > ? and Rnum <= ? ";
+				sql = "select * from Board7 order by ref desc,pos asc, pos limit ?,?";
 				stmt = con.prepareStatement(sql);
-				stmt.setInt(1, start);
-				stmt.setInt(2, end+1);
+				stmt.setInt(1, start-1);
+				stmt.setInt(2, end);
 			//}else {
 				//sql = "select * from Board7 where "+keyWord+" Like ? ";
 				//sql = sql+" order by ref desc,pos limit ?,?";
@@ -184,7 +183,7 @@ public class BoardDAO {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql = null;
-		String pw = null;
+		String pw = null; 
 		
 		try {
 			con = pool.getConnection();
