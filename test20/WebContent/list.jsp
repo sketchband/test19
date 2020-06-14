@@ -58,6 +58,7 @@ int listSize = 0;
 			</tr>
 	<%} %>
 <%} %>	
+
 <tr>
 <td></td>
 <td></td>
@@ -73,8 +74,9 @@ int listSize = 0;
 <%
 	if(count>0){
 		int pageCount = count/pageSize + ((count%pageSize == 0) ? 0 : 1); 
+		//pageCount 전체 페이지 갯수.
 		int startPage = ((nowPage-1)/10)*10+1;
-		int block = 10;
+		int block = 5;
 		int endPage = startPage+block-1;
 		
 		if(endPage>pageCount) {
@@ -84,7 +86,7 @@ int listSize = 0;
 		if(startPage>10){
 			%>
 			
-			<a href="list.jsp?pageNum=<%=startPage-10%>">[이전]</a>
+			<a href="list.jsp?pageNum=<%=startPage-5%>">[이전]</a>
 			<%
 		}
 		for(int i=startPage;i<=endPage;i++){
@@ -96,7 +98,7 @@ int listSize = 0;
 		}
 		if(endPage<pageCount){
 			%>
-			<a href="list.jsp?pageNum=<%=nowPage+10%>">[다음]</a>
+			<a href="list.jsp?pageNum=<%=endPage+10%>">[다음]</a>
 			<%
 		}
 	}
